@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockEstate - Student Real Estate Marketplace</title>
+  <link rel="icon" type="image/x-icon" href="./img1.jpg">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="./img1.jpg" id="logo-img" alt="BlockEstate Logo" />
+      <h1>BlockEstate</h1>
+    </div>
+    <div class="nav-buttons">
+      <button id="loginBtn" class="btn secondary-btn">Student Login</button>
+      <button id="connectButton" class="btn primary-btn">Connect MetaMask</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Student Real Estate <span class="highlight">Marketplace</span></h1>
+      <p>Blockchain-powered platform connecting student renters with verified properties near campus</p>
+      <div class="hero-buttons">
+        <button id="exploreBtn" class="btn primary-btn">Explore Properties</button>
+        <button id="registerPropertyBtn" class="btn secondary-btn">Register Property</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img  class="real-estate-img" src="https://img.freepik.com/free-vector/real-estate-abstract-concept-vector-illustration-real-estate-agency-residential-industrial-commercial-property-market-investment-portfolio-home-ownership-property-value-abstract-metaphor_335657-1967.jpg" alt="Real Estate Illustration" />
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <h2>Why Choose BlockEstate?</h2>
+    <div class="feature-cards">
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure Transactions</h3>
+        <p>Blockchain-powered smart contracts ensure secure and transparent transactions</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💸</div>
+        <h3>Student Discounts</h3>
+        <p>Special rates for verified students with valid university credentials</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Easy Management</h3>
+        <p>Simplified property management for both students and landlords</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Student Login Section -->
+  <div id="studentLogin" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Student Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="studentID">Student ID</label>
+          <input type="text" id="studentID" placeholder="Enter Student ID" name="studentID" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter Password" name="password" required>
+        </div>
+        <button type="submit" class="btn primary-btn">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Property Listing Section -->
+  <div id="propertyList" class="properties-container hidden">
+    <h2>Available Properties</h2>
+    <div class="properties-grid">
+      <!-- Property cards will be loaded dynamically -->
+      <div id="loadingProperties" class="loading-message">
+        <p>Loading properties from blockchain...</p>
+      </div>
+      <div id="noPropertiesMessage" class="no-content-message hidden">
+        <p>No properties available. Register a new property!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirmation Section for Smart Contract -->
+  <div id="confirmation" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div class="confirmation-content">
+        <div class="confirmation-icon">✓</div>
+        <h2>Smart Contract Signed!</h2>
+        <p>You have successfully signed the contract for the selected property.</p>
+        <p class="transaction-id">Transaction ID: <span id="txHash">0x123...abc</span></p>
+        <button class="btn primary-btn" id="closeTxBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Registration Section -->
+  <div id="propertyRegistration" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2>Register Your Property</h2>
+      <form id="registerForm">
+        <!-- In the studentLogin modal in index.html -->
+        <div class="form-group">
+          <label for="studentName">Full Name</label>
+          <input type="text" id="studentName" placeholder="Enter Your Name" name="studentName" required>
+        </div>
+        <div class="form-group">
+          <label for="propertyTitle">Property Title</label>
+          <input type="text" id="propertyTitle" placeholder="e.g., Cozy Studio Apartment" required />
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="Property Location" required />
+        </div>
+        <div class="form-group">
+          <label for="price">Price (EDU)</label>
+          <input type="number" id="price" placeholder="Price in EDU" step="0.01" required />
+        </div>
+        <div class="form-group">
+          <label for="studentDiscount">Student Discount (%)</label>
+          <input type="number" id="studentDiscount" placeholder="e.g., 10" min="0" max="50" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" placeholder="Describe your property"></textarea>
+        </div>
+        <button type="submit" class="btn primary-btn">Register Property</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Network Error Modal -->
+  <div id="networkError" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div class="error-content">
+        <div class="error-icon">⚠️</div>
+        <h2>Network Error</h2>
+        <p>Please make sure you're connected to the correct blockchain network.</p>
+        <button class="btn primary-btn" id="closeErrorBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include External JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
