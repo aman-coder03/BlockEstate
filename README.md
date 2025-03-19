@@ -29,4 +29,4 @@ BlockEstate is a decentralized platform designed to revolutionize real estate tr
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/Dhruv-Rankoti/BlockEstate.git
+   git clone https://github.com/aman-coder03/BlockEstate.git
