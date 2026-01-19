@@ -4,6 +4,7 @@ let web3;
 let contract;
 let account;
 
+
 // ABI from the compiled smart contract - this is crucial for interacting with the contract
 const abi = [
     {
@@ -619,3 +620,4 @@ document.addEventListener('DOMContentLoaded', function() {
         updateUIAfterLogin(storedName);
     }
 });
+
