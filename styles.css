@@ -1,4 +1,5 @@
 /* Base Styles */
+
 * {
   margin: 0;
   padding: 0;
@@ -626,3 +627,4 @@ textarea {
 #logo-img {
   width: 40px;
 }
+
