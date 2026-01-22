@@ -16,8 +16,6 @@ BlockEstate is a decentralized platform designed to revolutionize real estate tr
 - **React.js**: Frontend development framework.
 - **Hardhat**: Ethereum development environment.
 
-## Getting Started
-
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14.x or later)
